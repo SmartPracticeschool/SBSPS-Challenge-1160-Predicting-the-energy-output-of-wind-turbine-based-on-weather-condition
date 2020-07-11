@@ -1,0 +1,11 @@
+Data Sources used in Training the models
+
+    https://data.open-power-system-data.org/time_series/
+    https://www.elia.be/en/grid-data/power-generation
+    https://data.open-power-system-data.org/weather_data/
+    
+References:
+https://openei.org/datasets/dataset/miller-keith-2018-windplantdata
+https://data.open-power-system-data.org/weather_data/2019-04-09/weather_data.csv
+http://www.sotaventogalicia.com/en/technical-area/real-time-data/historical/
+https://www.nrel.gov/grid/eastern-wind-data.html
