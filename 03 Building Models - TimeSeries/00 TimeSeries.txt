@@ -1,0 +1,33 @@
+Time Series Model Details
+    - In our application we needed to forecast the future values for the power output.
+    - ML models are used in case of classification and regression but are not very helpful 
+    for predicting future values.
+    - This was the main reason we decide to focus on the time series model.
+
+Trends & Seasonality
+    - First part while looking for timeSeries models is to check for trends and seasonality.
+    - During initial Visulaisation we found there wase a slight seasonality during each month.
+    - There was slight peak and drop of data point but was not very regular.
+
+Stationarity
+    - Next thing we look for is the stationarity.
+    - To apply any timeseries model we need the data to be stationary and if its is 
+    not predictions are very good so we have to make the data stationary by shifts with
+    differencing or any other methods.
+
+ARMA
+    - Started with very basic model (Auto Regressive Moving Average)
+    - Prediction were not perfect but were good to get going with it.
+    - Faced a problem with predicting the future value count ie till what date and time to predict
+
+ARIMA & SARIMAX
+    - In this Used some P,Q,D values for the ARIMA model
+    - The results were initialy vague but improving with fine tuning
+
+
+Refrences
+    Forecasting Future Sales Using ARIMA and SARIMAX
+    https://www.youtube.com/watch?v=2XGSIlgUBDI
+
+    Time Series Analysis in Python | Time Series Forecasting Project [Complete] | Python Data Science
+    https://www.youtube.com/watch?v=MmC4b7gPY0Q
