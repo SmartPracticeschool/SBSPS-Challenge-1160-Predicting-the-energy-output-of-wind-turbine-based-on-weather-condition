@@ -184,89 +184,71 @@ def create_wind_speed_daily(df):
     # fig.update_traces()
     return fig
 
+
+###########################  RANGE BASED ############################
+switch = html.Div(
+    [
+        dbc.Button("Date Based", color="warning" , href="/show_factors_date"),
+    ]
+)
+
+topic = html.Div(
+    [
+        html.H4(
+            children='Range based visualization',
+            style={
+            'textAlign':'center',
+            'color':'black',
+            }),
+        
+    ]
+)
+datePick = html.Div(
+        [
+            html.Div(style={'height': '20px'},children=["Date Range : ",
+            dcc.DatePickerRange(
+                style={"margin-left": "15px"},
+                id='selection_based_on_dates',
+                min_date_allowed=dt(2018, 1, 1),
+                max_date_allowed=dt(2018, 12, 31),
+                start_date_placeholder_text="Start Date",
+                end_date_placeholder_text="End Date",
+                display_format='D/M/Y',
+                month_format='MMM Do, YY',
+                with_portal=True,
+                start_date=dt(2018, 1, 1),
+                end_date=dt(2018, 1, 31)
+            )]),
+        ]
+)
+rangeBased = dbc.Row([dbc.Col(switch , width=2),dbc.Col(topic, width=5), dbc.Col(datePick, width=5)])
+###########################  RANGE BASED END ############################
+
+
 # App layout for this page
 layout = html.Div(children=[
-    html.Br(),
-    html.H3(
-        children='Various factors affecting power output',
-        style={
-            'textAlign': 'center',
-            'color': colors['background'],
-            'fontWeight': 900
-        }
-    ),
-    html.Br(),
+    html.Div(className="container", children=[
+        html.Br(),
+        html.H1(
+            children='Power output Visualizations',
+            style={
+                'textAlign': 'center',
+                'color': colors['background'],
+                'font-family': 'Arial',
+            }
+        ),
+        html.Br(),
+        ############### Range Based ##########
+        rangeBased,
+        
+    ]),
+
     html.Div(children=[
         # Graph 1
-        html.H4(
-            children='Time-period based visualization',
-            style={
-            'textAlign':'center',
-            'color':'black',
-            'fontWeight': 700
-            }),
-        html.Div(style={'margin-left' : '15px', 'float' : 'inherit'},children=["Date Range : ",
-        dcc.DatePickerRange(
-            style={"margin-left": "15px"},
-            id='selection_based_on_dates',
-            min_date_allowed=dt(2018, 1, 1),
-            max_date_allowed=dt(2018, 12, 31),
-            start_date_placeholder_text="Start Date",
-            end_date_placeholder_text="End Date",
-            display_format='D/M/Y',
-            month_format='MMM Do, YY',
-            with_portal=True,
-            start_date=dt(2018, 1, 1),
-            end_date=dt(2018, 1, 31)
-        )]),
         html.Br(),
         html.Div(id='output_visualization_total'),
-        html.Hr(),
         html.Div(id='output_total_windspeed')
     ]),
-    html.Br(),
-    html.Hr(),
-    html.Hr(),
-    html.Div(children=[
-        # Graph 2
-        html.H4(
-            children='Time-period based visualization for a specific date',
-            style={
-            'textAlign':'center',
-            'color':'black',
-            'fontWeight': 700
-            }),
-        html.Div(style={'margin-left' : '15px'},children=[
-        "Select Date : ",
-        dcc.DatePickerSingle(
-            style={"margin-left": "15px"},
-            id='selection_based_on_hours',
-            min_date_allowed=dt(2018, 1, 1),
-            max_date_allowed=dt(2018, 12, 31),
-            display_format='D/M/Y',
-            month_format='MMM Do, YY',
-            with_portal=True,
-            date=str(dt(2018, 1, 1))
-        )]),
-        html.Br(),
-        html.Div(style={'margin-left' : '15px'},children=[
-        "Select Time Range (in 24-hour format) : ",
-        dcc.RangeSlider(
-            id='time_range',
-            min=0,
-            max=24,
-            allowCross=False,
-            step=1,
-            marks=get_marks(),
-            value=[0, 24]
-        )]),
-        html.Div(id='output_visualization_daybase'),
-        html.Hr(),
-        html.Div(id='output_daywise_windspeed')
-    ]),
-    html.Br(),
-    html.Hr(),
-    html.Hr(),
 ])
 
 @app.callback(
@@ -279,7 +261,7 @@ def update_total_graph(start_date, end_date):
     return dcc.Graph(
         id='total_graph',
         figure=fig
-        )
+    )
 
 @app.callback(
     dash.dependencies.Output('output_total_windspeed', 'children'),
@@ -291,28 +273,5 @@ def update_total_windspeed_graph(start_date, end_date):
     return dcc.Graph(
         id='total_windspeed_graph',
         figure=fig
-        )
+    )
 
-@app.callback(
-    dash.dependencies.Output('output_visualization_daybase', 'children'),
-    [dash.dependencies.Input('selection_based_on_hours', 'date'),
-    dash.dependencies.Input('time_range', 'value')])
-def update_total_daywise(date, value):
-    data = filter_data_based_on_hours(date, value[0], value[1], df)
-    fig = create_daily_figure(data)
-    return dcc.Graph(
-        id='daily_graph',
-        figure=fig
-        )
-
-@app.callback(
-    dash.dependencies.Output('output_daywise_windspeed', 'children'),
-    [dash.dependencies.Input('selection_based_on_hours', 'date'),
-    dash.dependencies.Input('time_range', 'value')])
-def update_total_daywise(date, value):
-    data = filter_data_based_on_hours(date, value[0], value[1], df)
-    fig = create_wind_speed_daily(data)
-    return dcc.Graph(
-        id='daily_windspeed_graph',
-        figure=fig
-        )
