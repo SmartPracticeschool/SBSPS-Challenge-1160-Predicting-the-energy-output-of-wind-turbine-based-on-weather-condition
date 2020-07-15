@@ -1,1 +1,2 @@
-Comparing results of various models and finalising the results
+Choose the best regressor models after hyperparamter optimization and used the Voting Regressor to combine the results of all models.
+This methods increases the accuracy and at the same time helps in model generalization.
