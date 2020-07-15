@@ -1,6 +1,6 @@
 # Predicting Energy Output of Wind Turbine
 <br>
-Tutorial Link - <br>
+Tutorial Link - https://drive.google.com/file/d/1BeQ2QTw0rem3Un2vyIhRRYPnsbxqRORv/view?usp=sharing<br>
 
 ### Implementation
 
