@@ -135,7 +135,10 @@ def create_wind_speed_daily(df):
 switch1 = html.Div(
     [
         dbc.Button("Range Based", color="warning" , href="/show_factors"),
-    ]
+    ],
+    style={
+        "marginLeft":'40px'
+    }
 )
 
 topic1 = html.Div(
@@ -143,8 +146,9 @@ topic1 = html.Div(
         html.H4(
             children='Date based visualization',
             style={
-            'textAlign':'center',
+            # 'textAlign':'center',
             'color':'black',
+            'marginLeft': '65px'
             }),
         
     ]
@@ -165,7 +169,7 @@ datePick1 = html.Div(
             )]),
         ]
 )
-dateBased = dbc.Row([dbc.Col(switch1 , width=2),dbc.Col(topic1, width=7), dbc.Col(datePick1, width=3)])
+dateBased = dbc.Row([dbc.Col(datePick1 , width=4),dbc.Col(topic1, width=6), dbc.Col(switch1, width=2)])
 ###########################  DATE BASED END  ############################
 
 

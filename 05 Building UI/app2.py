@@ -62,14 +62,14 @@ df['date'] = pd.to_datetime(df['date'])
 def create_total_figure(df):
     fig = go.Figure()
     fig.add_trace(go.Scatter(
-        x=df['date'],
+        x=df['Date/Time'],
         y=df['Theoretical_Power_Curve (KWh)'],
         mode='lines',
         name='Theoretical_Power_Curve (KWh)',
         marker=dict(symbol="circle", color="green")))
 
     fig.add_trace(go.Scatter(
-        x=df['date'],
+        x=df['Date/Time'],
         y=df['LV ActivePower (kW)'],
         mode='lines',
         name='LV ActivePower (kW)',
@@ -193,7 +193,10 @@ def create_wind_speed_daily(df):
 switch = html.Div(
     [
         dbc.Button("Date Based", color="warning" , href="/show_factors_date"),
-    ]
+    ],
+    style={
+        "marginLeft":'50px'
+    }
 )
 
 topic = html.Div(
@@ -201,8 +204,9 @@ topic = html.Div(
         html.H4(
             children='Range based visualization',
             style={
-            'textAlign':'center',
+            # 'textAlign':'center',
             'color':'black',
+            'marginLeft': '60px'
             }),
         
     ]
@@ -224,7 +228,7 @@ datePick = html.Div(
             )]),
         ]
 )
-rangeBased = dbc.Row([dbc.Col(switch , width=2),dbc.Col(topic, width=5), dbc.Col(datePick, width=5)])
+rangeBased = dbc.Row([dbc.Col(datePick , width=4),dbc.Col(topic, width=6), dbc.Col(switch, width=2)])
 ###########################  RANGE BASED END ############################
 
 
