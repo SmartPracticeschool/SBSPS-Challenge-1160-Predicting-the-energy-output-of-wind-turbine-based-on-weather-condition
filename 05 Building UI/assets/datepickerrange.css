@@ -1,0 +1,9 @@
+.DateInput_input, .DateInput_input_1{
+	font-weight: 184;
+	font-size: 13px;
+	line-height: 15px;
+	color: #484848;
+	/*background-color: #eeeeee;*/
+	width: 100%;
+	padding: 9px 34px 9px;
+}
