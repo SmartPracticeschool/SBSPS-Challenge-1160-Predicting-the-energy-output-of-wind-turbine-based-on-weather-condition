@@ -1,1 +1,3 @@
-All the ML Learning Models used.
+Build 5 models and performed hyperparamter optimization using Randomised Search CV  on  random forest and Xgboost  models to improve their base score.
+Manually tuned svm model.
+Used linear regression ,svm,random forest,xgboost models to make an ensemble model in the next stage.
