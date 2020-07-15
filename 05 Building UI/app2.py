@@ -52,7 +52,7 @@ def get_marks():
     return marks
 
 #load data into a dataframe
-url = 'https://gist.githubusercontent.com/TechTarun/3497b164548f3c7d7a400b2af3c76fdf/raw/be0fd8f8a1b10cf922c137cc1810da6f5b332c09/data.csv'
+url = './data.csv'
 df = pd.read_csv(url)
 # df = pd.read_csv('E:\\Projects\\ibm hack challenge\\ibm app\\apps\\data.csv')
 df['date'] = pd.to_datetime(df['date'])
@@ -62,14 +62,14 @@ df['date'] = pd.to_datetime(df['date'])
 def create_total_figure(df):
     fig = go.Figure()
     fig.add_trace(go.Scatter(
-        x=df['Date/Time'],
+        x=df['date'],
         y=df['Theoretical_Power_Curve (KWh)'],
         mode='lines',
         name='Theoretical_Power_Curve (KWh)',
         marker=dict(symbol="circle", color="green")))
 
     fig.add_trace(go.Scatter(
-        x=df['Date/Time'],
+        x=df['date'],
         y=df['LV ActivePower (kW)'],
         mode='lines',
         name='LV ActivePower (kW)',
@@ -82,12 +82,16 @@ def create_total_figure(df):
         font_color=colors['background'],
         title='Variation in Theoretical power and LV Active power within a time period',
         xaxis_title="Timeline",
-        # font=dict(
-        #     family="Courier New, monospace",
-        #     size=13,
-        #     color=colors['background'],
-
-        # ),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1,
+            bgcolor="LightSteelBlue",
+            bordercolor="Black",
+            borderwidth=2
+        ),
     )
     return fig
 
@@ -205,9 +209,8 @@ topic = html.Div(
 )
 datePick = html.Div(
         [
-            html.Div(style={'height': '20px'},children=["Date Range : ",
+            html.Div(children=["Date Range : ",
             dcc.DatePickerRange(
-                style={"margin-left": "15px"},
                 id='selection_based_on_dates',
                 min_date_allowed=dt(2018, 1, 1),
                 max_date_allowed=dt(2018, 12, 31),
