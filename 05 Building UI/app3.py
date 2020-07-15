@@ -52,7 +52,7 @@ def get_marks():
     return marks
 
 #load data into a dataframe
-url = 'https://gist.githubusercontent.com/TechTarun/3497b164548f3c7d7a400b2af3c76fdf/raw/be0fd8f8a1b10cf922c137cc1810da6f5b332c09/data.csv'
+url = './data.csv'
 df = pd.read_csv(url)
 # df = pd.read_csv('E:\\Projects\\ibm hack challenge\\ibm app\\apps\\data.csv')
 df['date'] = pd.to_datetime(df['date'])
@@ -82,6 +82,16 @@ def create_daily_figure(df):
         font_color=colors['background'],
         title='Variation in Theoretical power and LV Active power on a specific date',
         xaxis_title="Timeline",
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1,
+            bgcolor="LightSteelBlue",
+            bordercolor="Black",
+            borderwidth=2
+        ),
         # font=dict(
         #     family="Courier New, monospace",
         #     size=13,
