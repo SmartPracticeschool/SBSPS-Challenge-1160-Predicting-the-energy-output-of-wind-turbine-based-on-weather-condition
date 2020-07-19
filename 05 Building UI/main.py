@@ -3,9 +3,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_auth
-from app import app
-from app import server
-import app1, app2, app3
+from app_init import app
+from app_init import server
+import predictions, range_based, date_based, upload_train
 
 server = server
 
@@ -144,16 +144,19 @@ index_page = html.Div(style={'position':'absolute'}, children=[
     [dash.dependencies.Input('url', 'pathname')])
 def update_content(pathname):
     if pathname == '/show_factors':
-        return app2.layout
+        return range_based.layout
 
     elif pathname == '/show_factors_date':
-        return app3.layout
+        return date_based.layout
 
     elif pathname == '/show_predictions':
-        return app1.layout
+        return predictions.layout
     
     elif pathname == '/':
         return index_page
+
+    elif pathname == '/retrain':
+        return upload_train.layout
 
 @app.callback(
     dash.dependencies.Output('navbar', 'children'),
@@ -167,6 +170,9 @@ def update_content(pathname):
         elif pathname == '/show_predictions':
             return navbar
         
+        elif pathname == '/retrain':
+            return navbar
+
         elif pathname == '/':
             return navbar
         
@@ -190,6 +196,8 @@ navbar = dbc.NavbarSimple(
         dbc.NavItem(dbc.NavLink("Home", active=True, href='/')),
         dbc.NavItem(dbc.NavLink("Predictions", href="/show_predictions")),
         dbc.NavItem(dbc.NavLink("Visualizations", href="/show_factors")),
+        dbc.NavItem(dbc.NavLink("Retrain", href="/retrain")),
+
 
     ],
     brand="IBMHC",

@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from plotly.subplots import make_subplots
 import pandas as pd
-from app import app
+from app_init import app
 import numpy as np
 
 ####### load the data ########

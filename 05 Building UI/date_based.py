@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime as dt
 import re
-from app import app
+from app_init import app
 
 colors = {
     'background': '#111111',
