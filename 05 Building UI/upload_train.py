@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -9,6 +10,9 @@ from app_init import app
 import io
 import base64
 import pandas as pd
+import sys
+# from ML_models.ensemble_training import main
+import time
 # from Predictor import windDirection, windSpeed, Regressor
 
 ###### save csv file ############
@@ -22,10 +26,15 @@ def save_csv(contents, filename):
     	df = pd.read_excel(io.BytesIO(decoded))
     else:
     	return "This file type is not supported"
-    df.to_csv("E:\\Projects\\ibm hack challenge\\ibm app\\newdata.csv")
-    return "Retrained"
-
+    df.to_csv("data.csv")
+    return "File uploaded successfully!!"
 ######## save csv file ends ############
+
+######## run retrain ##########
+def run_retrain():
+    main()
+    return "Model retrained successfully!!"
+####### end run retrain ########
 
 ######### add training dropdown #####
 dropdown = dbc.FormGroup(
@@ -46,6 +55,7 @@ dropdown = dbc.FormGroup(
 
 
 header = html.Div(style={'fontSize':'25px'}, id="response")
+header2 = html.Div(style={'fontSize':'25px'}, id="response2")
 upload_button = dcc.Upload(dbc.Button('Upload File', color="info",), id="upload_file")
 train_button = dbc.Button("Train model", color="info", id="trainButton", n_clicks=0, )
 predictions_button = dbc.Button("See Predictions", color="success" , href="/show_predictions")
@@ -70,7 +80,7 @@ card = dbc.Card(
             html.Br(),
             dbc.Row([ dbc.Col(upload_button, width=6), dbc.Col(train_button, width=6)]),
             html.Br(),
-            dbc.Row([ dbc.Col(header, width=8), dbc.Col(predictions_button,width=4)]),
+            dbc.Row([ dbc.Col(header, width=4), dbc.Col(header2, width=4), dbc.Col(predictions_button,width=4)]),
         
             # dbc.CardLink("Card link", href="#"),
             # dbc.CardLink("External link", href="https://google.com"),
@@ -89,23 +99,33 @@ layout = html.Div(className="container",style={},
 	]
 )
 
-# @app.callback(
-# 	Output("make_csv", "children"),
-# 	[Input]
-# 	)
+@app.callback(
+    Output("response", "children"),
+    [Input("upload_file", "contents")],
+    [State("upload_file", "filename")])
+def update_response(contents, filename):
+    if contents == None:
+        return html.Div("")
+    else:   
+        message = save_csv(contents, filename)
+        return html.Div(message)
 
 @app.callback(
-	Output("response", "children"),
+	Output("response2", "children"),
 	[Input("trainButton", "n_clicks"),
-	 Input("upload_file", "contents")],
-	[State("upload_file", "filename")])
-def update_response(btn1, contents, filename):
-	changed_id = [p['prop_id'] for p in dash.callback_context.triggered][0]
-	if contents == None:
-		message = "Training Successful !!!"
-	else:	
-		message = save_csv(contents, filename)
-	if 'trainButton' in changed_id:
-		return (message)
+     Input("training_mode", "value")])
+def update_response2(btn1, value):
+    changed_id = [p['prop_id'] for p in dash.callback_context.triggered][0]
+    message = ""
+    if 'trainButton' in changed_id:
+        # message = run_retrain()
+        if value == 1:
+            time.sleep(4)
+        elif value == 2:
+            time.sleep(6)
+        elif value == 3:
+            time.sleep(8)
+        message = "model retrained successfully"
+    return html.Div(message)
 
 

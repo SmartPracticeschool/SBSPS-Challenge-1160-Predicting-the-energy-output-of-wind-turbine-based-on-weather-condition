@@ -52,7 +52,7 @@ def get_marks():
     return marks
 
 #load data into a dataframe
-url = './data.csv'
+url = 'data.csv'
 df = pd.read_csv(url)
 # df = pd.read_csv('E:\\Projects\\ibm hack challenge\\ibm app\\apps\\data.csv')
 df['date'] = pd.to_datetime(df['date'])
