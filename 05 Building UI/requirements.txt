@@ -41,7 +41,7 @@ dash-table==4.8.1
 decorator==4.4.2
 defusedxml==0.6.0
 distlib==0.3.0
-Django==3.0.3
+Django==3.0.7
 django-filter==2.2.0
 django-graphql-jwt==0.3.1
 django-phone-field==1.8.0
