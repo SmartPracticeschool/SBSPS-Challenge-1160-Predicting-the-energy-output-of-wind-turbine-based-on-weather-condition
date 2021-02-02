@@ -10,7 +10,7 @@ Automat==20.2.0
 autopep8==1.5
 backcall==0.1.0
 beautifulsoup4==4.8.2
-bleach==3.1.4
+bleach==3.3.0
 blis==0.4.1
 boto==2.49.0
 boto3==1.12.16
