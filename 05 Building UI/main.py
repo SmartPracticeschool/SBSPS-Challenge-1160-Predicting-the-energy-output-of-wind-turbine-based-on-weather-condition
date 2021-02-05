@@ -2,27 +2,16 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-import dash_auth
 from app_init import app
 from app_init import server
 import predictions, range_based, date_based, upload_train
 
 server = server
 
-
-VALID_USERNAME_PASSWORD_PAIRS = {
-    'admin': 'Root@1234'
-}
-
 colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
-
-auth = dash_auth.BasicAuth(
-    app,
-    VALID_USERNAME_PASSWORD_PAIRS
-)
 
 app.layout = html.Div(children=[
     
@@ -68,7 +57,7 @@ right_card = html.Div(
                 "Wind Direction: 43 Deg"
             ),
             html.P(
-                "Power Output: 873498"
+                "Power Output: 1310 KW"
             ),
             html.H5(
                 "Status:"

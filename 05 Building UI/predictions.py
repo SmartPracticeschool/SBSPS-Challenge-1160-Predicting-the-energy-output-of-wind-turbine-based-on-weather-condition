@@ -4,15 +4,14 @@ import dash_html_components as html
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from plotly.subplots import make_subplots
+from dash.dependencies import Input, Output, State
 import pandas as pd
 from app_init import app
 import numpy as np
 
 ####### load the data ########
-url = 'https://drive.google.com/file/d/1-1xB5H5D17zyCheRphDYz7D5C98jbk0I/view?usp=sharing'
-path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
-df = pd.read_csv(path)
-
+url = 'Future_Data.csv'
+df = pd.read_csv(url)
 ####### helper functions #########
 def plot_wind_speed(df):
     fig = make_subplots(rows=1, cols=2, specs=[[{'type': 'polar'}, {'type': 'xy'}]])
@@ -96,7 +95,7 @@ def get_hours():
 
 ####### app layout #########
 header = html.Div("Predictions for next 72 hrs.", style={'textAlign':'center', 'marginLeft':'200px', 'fontSize':'25px'})
-Button = dbc.Button("Update Predictions", color="info" , href="/show_predictions")
+Button = dbc.Button("Update Predictions", color="info" , href="/show_predictions", id="update", n_clicks=0)
 
 layout = html.Div(children=[
     html.Br(),
@@ -111,3 +110,14 @@ layout = html.Div(children=[
 
 ])
 
+
+@app.callback(
+    Output("header", "children"),
+    [Input("update", "n_clicks")])
+def update_header(btn1):
+    changed_id = [p['prop_id'] for p in dash.callback_context.triggered][0]
+    message = "Predictions for next 72 hrs."
+    if 'trainButton' in changed_id:
+        update()
+        message = "Predictions for next 72 hrs."
+    return html.Div(message)
