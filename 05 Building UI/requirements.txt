@@ -163,7 +163,7 @@ PyAudio==0.2.11
 pycodestyle==2.5.0
 pycparser==2.19
 PyDispatcher==2.0.5
-Pygments==2.6.1
+Pygments==2.7.4
 PyHamcrest==2.0.2
 pyjsparser==2.7.1
 PyJWT==1.7.1
