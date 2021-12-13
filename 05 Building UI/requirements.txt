@@ -118,7 +118,7 @@ kiwisolver==1.1.0
 krovetz==1.0.2
 lab==6.0
 lazy-object-proxy==1.4.2
-lxml==4.5.0
+lxml==4.6.5
 mail-parser==3.12.0
 Markdown==3.2.2
 MarkupSafe==1.1.1
