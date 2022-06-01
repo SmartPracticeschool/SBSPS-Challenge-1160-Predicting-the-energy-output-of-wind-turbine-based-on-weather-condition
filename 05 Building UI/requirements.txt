@@ -81,7 +81,7 @@ html5lib==1.0.1
 httmock==1.3.0
 http-request-randomizer==1.2.3
 httpcore==0.9.1
-httpx==0.13.3
+httpx==0.23.0
 hyperframe==5.2.0
 hyperlink==19.0.0
 idna==2.8
