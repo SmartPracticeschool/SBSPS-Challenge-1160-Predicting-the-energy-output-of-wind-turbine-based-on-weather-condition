@@ -198,7 +198,7 @@ s3transfer-python3==0.2.0
 schedule==0.6.0
 scikit-learn==0.22.2.post1
 scipy==1.4.1
-Scrapy==2.0.0
+Scrapy==2.6.2
 scrapy-user-agents==0.1.1
 seaborn==0.10.1
 selenium==3.141.0
