@@ -153,7 +153,7 @@ prometheus-client==0.7.1
 promise==2.3
 prompt-toolkit==3.0.5
 Protego==0.1.16
-protobuf==3.12.2
+protobuf==3.18.3
 psutil==5.7.0
 psycopg2-binary==2.8.4
 py-translate==1.0.3
